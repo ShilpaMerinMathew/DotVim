@@ -1,3 +1,4 @@
+
 "=============================
 "Sample .vimrc file by Shilpa
 "=============================
@@ -10,12 +11,44 @@ if has("autocmd")
   autocmd bufwritepost .vimrc source $MYVIMRC
 endif
 
+"Vundle Plugins
+"========================
+
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Plugin 'VundleVim/Vundle.vim'
+
+Plugin 'powerline/powerline'
+
+Plugin 'tpope/vim-fugitive'  "Git
+
+Plugin 'tpope/vim-surround' "surround; quoting
+
+Plugin 'scrooloose/nerdtree' "tree like explorer
+
+Plugin 'tmhedberg/SimpylFold' "Code  Folding
+
+Plugin 'davidhalter/jedi-vim'
+
+Plugin 'Vimjas/vim-python-pep8-indent'
+
+Plugin 'NLKNguyen/papercolor-theme'
+
+Plugin 'fatih/vim-go' "GO language
+
+Plugin 'moby/moby' "Docker
+
+Plugin 'jceb/vim-orgmode' "Vim-Org
+
+Plugin 'itchyny/lightline.vim'
+
+" Add plugins here
+call vundle#end()
 
 
 "Rebinding leader Key
 "==================
 let mapleader = ","
-
 
 
 "Edit vimrc on the fly
@@ -33,11 +66,45 @@ silent !stty -ixon
 " " Restore default behaviour when leaving Vim.
 autocmd VimLeave * silent !stty ixon
 
+"Lightline
+"=======================
+set laststatus=2
+set noshowmode
+let g:lightline = {
+  \   'colorscheme': 'wombat',
+  \   'component_function': {
+  \     'gitbranch': 'fugitive#head',
+  \   },
+  \ 'separator': { 'left': '', 'right': '' },
+  \ 'subseparator': { 'left': '', 'right': '' }
+  \ }
 
-"Color Scheme
+
+
+"Editor Color Scheme
 "=======================
 set background=light
 colorscheme PaperColor
+
+"Language specific color options
+"==============[==============================================]==========
+let g:PaperColor_Theme_Options = {
+  \   'language': {
+  \     'python': {
+  \       'highlight_builtins' : 1,
+  \       'python_highlight_builtin_funcs':1,
+  \       'python_highlight_indent_errors':1,
+  \       'python_highlight_space_errors':1       
+  \     },
+  \     'cpp': {
+  \       'highlight_standard_library': 1
+  \     },
+  \     'c': {
+  \       'highlight_builtins' : 1
+  \     }
+  \   }
+  \ }
+"================[==============================================]======
 
 "Mouse
 "============================
@@ -69,32 +136,11 @@ endfunction
 nnoremap <silent> <F5> :call <SID>StripTrailingWhitespaces()<CR>
 "===============[==============================================]=========
 
-"Language specific color options
-"==============[==============================================]==========
-let g:PaperColor_Theme_Options = {
-  \   'language': {
-  \     'python': {
-  \       'highlight_builtins' : 1,
-  \       'python_highlight_builtin_funcs':1,
-  \       'python_highlight_indent_errors':1,
-  \       'python_highlight_space_errors':1       
-  \     },
-  \     'cpp': {
-  \       'highlight_standard_library': 1
-  \     },
-  \     'c': {
-  \       'highlight_builtins' : 1
-  \     }
-  \   }
-  \ }
-"================[==============================================]======
-
 "Spelling Correction(American English)
 "======================
 set spell spelllang=en_us
 
 " Toggle spell checking on and off with `,s`
-let mapleader = ","
 nmap <silent> <leader>s :set spell!<CR>
 
 "Easier moving between tabs
@@ -135,7 +181,7 @@ set tw=79       "width of document
 "Wrapping text
 "=================
 command! -nargs=* Wrap set wrap linebreak nolist
-set showbreak=●
+set showbreak=◍
 set colorcolumn=80,100
 highlight ColorColumn ctermbg=233
 
@@ -179,36 +225,6 @@ filetype plugin on
 filetype indent on
 
 
-"Vundle Plugins
-"========================
-
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-Plugin 'VundleVim/Vundle.vim'
-
-Plugin 'powerline/powerline'
-
-Plugin 'tpope/vim-fugitive'  "Git
-
-Plugin 'tpope/vim-surround' "surround; quoting
-
-Plugin 'scrooloose/nerdtree' "tree like explorer
-
-Plugin 'tmhedberg/SimpylFold' "Code  Folding
-
-Plugin 'davidhalter/jedi-vim'
-
-Plugin 'Vimjas/vim-python-pep8-indent'
-
-Plugin 'jceb/vim-orgmode'
-
-Plugin 'NLKNguyen/papercolor-theme'
-
-
-
-
-" Add plugins here
-call vundle#end()
 
 " JEDI
 " ==================
