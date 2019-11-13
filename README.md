@@ -1,2 +1,2 @@
 # vim-config
-Configuration for vim editor
+Configuration for vim editor and something more
