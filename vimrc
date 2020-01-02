@@ -1,4 +1,3 @@
-
 " ===========================
 " .vimrc file by Shilpa
 " ===========================
@@ -30,7 +29,7 @@ call vundle#begin()
 
 "-------------------===Languages support===------------------
     Plugin 'davidhalter/jedi-vim'               " Python completion
-    Plugin 'valloric/youcompleteme'             " Code completion
+    "Plugin 'valloric/youcompleteme'             " Code completion
     Plugin 'ervandew/supertab'                  " tab
     Plugin 'timothycrosley/isort'               " sort imports
     Plugin 'google/yapf'                        " code formatter
@@ -39,7 +38,7 @@ call vundle#begin()
 
 "-------------------===Python===-----------------------------
     "Plugin 'pythoncomplete'                     " Python Code Completion
-    Plugin 'maralla/completor.vim'
+    "Plugin 'maralla/completor.vim'
     Plugin 'deoplete-plugins/deoplete-jedi'
     Plugin 'klen/python-mode'                   " Python mode(docs, refactor, lints...)
     Plugin 'Vimjas/vim-python-pep8-indent'      " python indent
@@ -64,53 +63,6 @@ call vundle#begin()
 " Add plugins here
 call vundle#end()
 
-
-"" Python settings
-"====================================================
-
-" ALE
-" ===================
-    " Ale with lightline
-    " ====================
-        let g:lightline={}
-
-		let g:lightline.component_expand={'linter_checking': 'lightline#ale#checking',
-      		\  'linter_warnings': 'lightline#ale#warnings',
-      		\  'linter_errors': 'lightline#ale#errors',
-      		\  'linter_ok': 'lightline#ale#ok',}
-
-		let g:lightline.component_type={
-			\     'linter_checking': 'left',
-			\     'linter_warnings': 'warning',
-			\     'linter_errors': 'error',
-			\     'linter_ok': 'left',}
-
-        let g:lightline.active={'right': [['linter_checking',
-            \   'linter_errors',
-            \   'linter_warnings',
-            \   'linter_ok']]}
-	" Ale
-	" ===================
-        " fixer
-        let b:ale_fixers=['autopep8', 'yapf']
-        let g:ale_fixers={'*': ['remove_trailing_lines', 'trim_whitespace']
-            \}
-        let g:ale_fix_on_save = 1
-        let g:ale_sign_column_always = 1
-        let g:ale_sign_error= '>>'
-        let g:ale_sign_warning= '--'
-        highlight ALEWarning ctermbg=DarkMagenta
-
-        " linting
-        let g:ale_lint_on_insert_leave = 1
-        let b:ale_linters = ['flake8', 'pylint']
-
-        " error list window
-        "let g:ale_list_window_size = 5
-
-" SUPER TAB
-" ==================
-        let g:SuperTabDefaultCompletionType = "<c-n>"
 " JEDI
 " ===================
         let g:jedi#goto_command = "<leader>d"
@@ -126,7 +78,9 @@ call vundle#end()
         let g:jedi#popup_on_dot = 1
         let g:jedi#use_splits_not_buffers = "left"
         let g:jedi#smart_auto_mappings = 1
-
+"PYMODE
+"================
+        let g:pymode_rope = 0
 
 " ISORT
 " ============================
@@ -137,18 +91,18 @@ call vundle#end()
 
 " UltiSnip settings
 " ====================================================
-    let g: UltiSnipsExpandTrigger = "<tab>"
+    "let g:UltiSnipsExpandTrigger = "<ctrl-q>"
     " vertically split ultisnips edit window
     "let g:UltiSnipsEditSplit="vertical"
 
 " You Complete Me
 " ====================
-	let g: ycm_python_interpreter_path = '/home/shilpa/.pyenv/shims/python3.7'
-	let g: ycm_python_sys_path = []
-	let g: ycm_extra_conf_vim_data = ['g:ycm_python_interpreter_path',
+	let g:ycm_python_interpreter_path = '/home/shilpa/.pyenv/shims/python3.7'
+	let g:ycm_python_sys_path = []
+	let g:ycm_extra_conf_vim_data = ['g:ycm_python_interpreter_path',
   	\  'g:ycm_python_sys_path'
   	\]
-	let g: ycm_global_ycm_extra_conf = '~/global_extra_conf.py'
+	let g:ycm_global_ycm_extra_conf = '~/global_extra_conf.py'
 
 	"let g: ycm_autoclose_preview_window_after_completion = 1
     "let g:ycm_use_ultisnips_completer = 1
@@ -168,11 +122,11 @@ call vundle#end()
 
 " Allow us to use Ctrl-s and Ctrl-q as keybinds
 " ===============================================
-    silent !stty -ixon
+    "silent !stty -ixon
 
 
 "" Restore default behaviour when leaving Vim.
-    autocmd VimLeave * silent !stty ixon
+    "autocmd VimLeave * silent !stty ixon
 
 " Lightline
 " =======================
@@ -183,8 +137,8 @@ call vundle#end()
             \   'component_function': {
             \     'gitbranch': 'fugitive#head',
             \   },
-            \ 'separator': { 'left': '', 'right': '' },
-            \ 'subseparator': { 'left': '', 'right': '' }
+            \ 'separator': { 'left': '', 'right': '' },
+            \ 'subseparator': { 'left': '', 'right': '' }
             \ }
 
 
@@ -334,7 +288,7 @@ call vundle#end()
 " =================
 
     " " toggle nerd tree display
-    map <F3>:NERDTreeToggle<CR>
+    map <F3> :NERDTreeToggle<CR>
     " " don't show these file types
     let NERDTreeIgnore = ['\.pyc$', '\.pyo$']
     let NERDTreeWinSize=20
@@ -345,14 +299,13 @@ call vundle#end()
 " Key Mapping
 " ==============
 "
-    :map <C-a> GVgg
-    :map <C-n> :enew
-    :map <C-o> :e . <Enter>
-    :map <C-c> y
-    :map <C-s> :w <Enter> <CR> :echo "Saved" <CR>
-    :map <C-x> d
-    :map <C-z> :q! <Enter>
-    :map <C-i> >>
-    :map <C-j> <<
-    :map <C-h> :%s/
-
+    map <C-a> GVgg
+    map <C-n> :enew
+    map <C-o> :e . <Enter>
+    map <C-c> y
+    map <C-s> :w <Enter> <CR> :echo "Saved" <CR>
+    map <C-x> d
+    map <C-z> :q! <Enter>
+    map <C-i> >>
+    map <C-j> <<
+    map <C-h> :%s/
