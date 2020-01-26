@@ -22,6 +22,7 @@ call vundle#begin()
 
 "------------------===Version Control===-------------
     Plugin 'tpope/vim-fugitive'  " Git
+    Plugin 'airblade/vim-gitgutter'
 
 "-------------------===Code/Project navigation===-------------
     Plugin 'scrooloose/nerdtree'                " tree like explorer
@@ -104,6 +105,22 @@ nnoremap <leader>. :CtrlPTag<cr>
         set guitablabel=%M\ %t
     endif
 
+" GIT GUTTER
+" =================
+        " Use fontawesome icons as signs
+        let g:gitgutter_sign_added = '+'
+        let g:gitgutter_sign_modified = '>'
+        let g:gitgutter_sign_removed = '-'
+        let g:gitgutter_sign_removed_first_line = '^'
+        let g:gitgutter_sign_modified_removed = '<'
+        let g:gitgutter_override_sign_column_highlight = 1
+        
+        highlight SignColumn guibg=bg
+        highlight SignColumn ctermbg=bg
+        
+        " Update sign column every quarter second
+        set updatetime=250
+
 
 " JEDI
 " ===================
@@ -144,6 +161,25 @@ nnoremap <leader>. :CtrlPTag<cr>
         let g:pymode_syntax_indent_errors = g:pymode_syntax_all
         let g:pymode_syntax_space_errors = g:pymode_syntax_all
 
+" CTRLP
+" =======
+        let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+        let g:ctrlp_custom_ignore = {
+          \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+          \ 'file': '\v\.(exe|so|dll)$',
+          \ 'link': 'SOME_BAD_SYMBOLIC_LINKS',
+          \ }
+        let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:10,results:20'
+        let g:ctrlp_reuse_window = 'netrw\|help\|quickfix'
+        let g:ctrlp_working_path_mode = 'ra'
+        let g:ctrlp_use_caching = 1
+        let g:ctrlp_cache_dir = $HOME.'/.cache/ctrlp'
+        let g:ctrlp_clear_cache_on_exit = 1
+        let g:ctrlp_max_files = 10000
+        let g:ctrlp_max_depth = 40
+        let g:ctrlp_show_hidden = 0
+        let g:ctrlp_tabpage_position = 'ac'
+
 " ISORT
 " ============================
     autocmd FileType python nnoremap <leader>s :!isort %<CR><CR>
@@ -153,26 +189,26 @@ nnoremap <leader>. :CtrlPTag<cr>
 
 " UltiSnip settings
 " ====================================================
-    let g:UltiSnipsExpandTrigger="<tab>"
-    let g:UltiSnipsJumpForwardTrigger="<tab>"
-    let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+        let g:UltiSnipsExpandTrigger="<tab>"
+        let g:UltiSnipsJumpForwardTrigger="<tab>"
+        let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
 " You Complete Me
 " ====================
-	let g:ycm_python_interpreter_path = '/home/shilpa/.pyenv/shims/python3.7'
-	let g:ycm_python_sys_path = []
-	let g:ycm_extra_conf_vim_data = ['g:ycm_python_interpreter_path',
-  	\  'g:ycm_python_sys_path'
-  	\]
-	let g:ycm_global_ycm_extra_conf = '~/global_extra_conf.py'
+        let g:ycm_python_interpreter_path = '/home/shilpa/.pyenv/shims/python3.7'
+        let g:ycm_python_sys_path = []
+        let g:ycm_extra_conf_vim_data = ['g:ycm_python_interpreter_path',
+            \  'g:ycm_python_sys_path'
+            \]
+        let g:ycm_global_ycm_extra_conf = '~/global_extra_conf.py'
 
-	"let g: ycm_autoclose_preview_window_after_completion = 1
-    "let g:ycm_use_ultisnips_completer = 1
+        "let g: ycm_autoclose_preview_window_after_completion = 1
+            "let g:ycm_use_ultisnips_completer = 1
 
-    "let g:ycm_global_ycm_extra_conf='~/.vim/ycm_extra_conf.py'
-    "let g:ycm_clangd_binary_path = exepath("clangd")
-    "let g:ycm_clangd_uses_ycmd_caching = 1
-    "let g:ycm_confirm_extra_conf = 1
+        "let g:ycm_global_ycm_extra_conf='~/.vim/ycm_extra_conf.py'
+        "let g:ycm_clangd_binary_path = exepath("clangd")
+        "let g:ycm_clangd_uses_ycmd_caching = 1
+        "let g:ycm_confirm_extra_conf = 1
 
 
 
@@ -294,6 +330,9 @@ nnoremap <leader>. :CtrlPTag<cr>
 " ==============================
     set number      "show number line
     set tw=79       "width of document
+    set cursorline  "highlight current line
+    set showcmd     " show command in bottom bar
+    set wildmenu    " visual autocomplete for command menu
 
 " Wrapping text
 " =================
@@ -349,7 +388,8 @@ nnoremap <leader>. :CtrlPTag<cr>
 " Add a bit extra margin to the left
 " ================================
     set foldcolumn=1
-
+    "set foldenable          " enable folding
+    "set foldmethod=indent
 
 " NERD Tree
 " =================
