@@ -54,14 +54,56 @@ call vundle#begin()
     "Plugin 'moby/moby'                          " Docker
     Plugin 'jceb/vim-orgmode'                   " Vim-Org
 
+"-------------------===Color schemes===-------------------------------
+    Plugin 'NLKNguyen/papercolor-theme'         " PaperColor
+    Plugin 'romainl/Apprentice'                 " apprentice
+    Plugin 'AlessandroYorba/Sierra'             " sierra
+    Plugin 'AlessandroYorba/Alduin'             " alduin
+    Plugin 'AlessandroYorba/Despacio'           " despacio
+    Plugin 'colepeters/spacemacs-theme.vim'     " spacemacs-theme
+    Plugin 'AlessandroYorba/Breve'              " breve
+    Plugin 'AlessandroYorba/Arcadia'            " arcadia
+
 "-------------------===Other===-------------------------------
-    Plugin 'tpope/vim-surround'                 " surround; quoting
-    Plugin 'NLKNguyen/papercolor-theme'         " Paper Color theme
+    Plugin 'tpope/vim-surround'                 " surround;
+    Plugin 'jiangmiao/auto-pairs'               " autopairing quotes,braces
+    Plugin 'preservim/nerdcommenter'            " commentor
+    Plugin 'linuxsuren/devops.vim'              " Devops
     Plugin 'itchyny/lightline.vim'              " status bar
     Plugin 'tmhedberg/SimpylFold'               " Code  Folding
 
 " Add plugins here
 call vundle#end()
+
+
+nnoremap <leader>. :CtrlPTag<cr>
+
+" Editor Color Scheme
+" =======================
+    if (has("termguicolors"))
+        set termguicolors
+    endif
+    if $COLORTERM == 'gnome-terminal'
+        set t_Co=256
+    endif
+    set background=light
+    colorscheme PaperColor "spacemacs-theme arcadia despacio PaperColor spacemacs-theme sierra
+
+    "let g:despacio_Sunset = 1
+    "let g:despacio_Twilight = 1
+    "let g:despacio_Midnight = 1
+    "let g:despacio_Midnight = 1
+
+" Set extra options when running in GUI mode
+"============================================
+
+    if has("gui_running")
+        set guioptions-=T
+        set guioptions-=e
+        set t_Co=256
+        set guitablabel=%M\ %t
+    endif
+
 
 " JEDI
 " ===================
@@ -80,7 +122,27 @@ call vundle#end()
         let g:jedi#smart_auto_mappings = 1
 "PYMODE
 "================
-        let g:pymode_rope = 0
+        let g:pymode = 1
+        let g:pymode_trim_whitespaces = 1
+        let g:pymode_options = 0
+        let g:pymode_indent = 1
+        let g:pymode_lint = 1
+        let g:pymode_lint_on_write = 1
+        let g:pymode_lint_checkers = ['pyflakes', 'pep8', 'mccabe']
+        let g:pymode_lint_signs = 1
+        let g:pymode_lint_todo_symbol = 'WW'
+        let g:pymode_lint_comment_symbol = 'CC'
+        let g:pymode_lint_visual_symbol = 'RR'
+        let g:pymode_lint_error_symbol = 'EE'
+        let g:pymode_lint_info_symbol = 'II'
+        let g:pymode_lint_pyflakes_symbol = 'FF'
+
+        let g:pymode_rope = 1
+        let g:pymode_rope_completion = 1
+
+        let g:pymode_syntax_all = 1
+        let g:pymode_syntax_indent_errors = g:pymode_syntax_all
+        let g:pymode_syntax_space_errors = g:pymode_syntax_all
 
 " ISORT
 " ============================
@@ -91,9 +153,9 @@ call vundle#end()
 
 " UltiSnip settings
 " ====================================================
-    "let g:UltiSnipsExpandTrigger = "<ctrl-q>"
-    " vertically split ultisnips edit window
-    "let g:UltiSnipsEditSplit="vertical"
+    let g:UltiSnipsExpandTrigger="<tab>"
+    let g:UltiSnipsJumpForwardTrigger="<tab>"
+    let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
 " You Complete Me
 " ====================
@@ -118,8 +180,6 @@ call vundle#end()
 " ====================
     nmap <leader>v :tabedit $MYVIMRC<CR>
 
-
-
 " Allow us to use Ctrl-s and Ctrl-q as keybinds
 " ===============================================
     "silent !stty -ixon
@@ -142,10 +202,6 @@ call vundle#end()
             \ }
 
 
-" Editor Color Scheme
-" =======================
-    set background=light
-    colorscheme PaperColor
 
 " Language specific color options
 " ==============[==============================================]==========
@@ -196,7 +252,7 @@ call vundle#end()
 
 " Spelling Correction(American English)
 " ======================
-    set spell spelllang=en_us
+"    set spell spelllang=en_us
 
 " Toggle spell checking on and off with `,s`
 " nmap <silent> <leader>s :set spell!<CR>
@@ -230,6 +286,9 @@ call vundle#end()
 " ===========================
     set pastetoggle=<F2>
 
+" Encoding
+" ===============
+    set encoding=UTF-8
 
 " Showing line number and length
 " ==============================
@@ -248,6 +307,7 @@ call vundle#end()
 " ==================
     set history=700
     set undolevels=700
+    set showmatch
 
 " Real Programmers don't use tabs but spaces
 " ============================================
@@ -282,6 +342,13 @@ call vundle#end()
     filetype plugin on
     filetype indent on
 
+"Always show current position
+"============================
+    set ruler
+
+" Add a bit extra margin to the left
+" ================================
+    set foldcolumn=1
 
 
 " NERD Tree
