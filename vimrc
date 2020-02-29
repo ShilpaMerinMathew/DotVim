@@ -31,16 +31,16 @@ call vundle#begin()
 "-------------------===Languages support===------------------
     Plugin 'davidhalter/jedi-vim'               " Python completion
     "Plugin 'valloric/youcompleteme'             " Code completion
-    Plugin 'ervandew/supertab'                  " tab
+    "Plugin 'ervandew/supertab'                  " tab
     Plugin 'timothycrosley/isort'               " sort imports
-    Plugin 'google/yapf'                        " code formatter
-    Plugin 'dense-analysis/ale'                 " ALE
-    Plugin 'maximbaz/lightline-ale'             " Lightline-ALE
+    "Plugin 'google/yapf'                        " code formatter
+    "Plugin 'dense-analysis/ale'                 " ALE
+    "Plugin 'maximbaz/lightline-ale'             " Lightline-ALE
 
 "-------------------===Python===-----------------------------
     "Plugin 'pythoncomplete'                     " Python Code Completion
     "Plugin 'maralla/completor.vim'
-    Plugin 'deoplete-plugins/deoplete-jedi'
+    "Plugin 'deoplete-plugins/deoplete-jedi'
     Plugin 'klen/python-mode'                   " Python mode(docs, refactor, lints...)
     Plugin 'Vimjas/vim-python-pep8-indent'      " python indent
 
@@ -53,23 +53,23 @@ call vundle#begin()
 "-------------------===Languages===-------------------------------
     "Plugin 'fatih/vim-go'                       " GO language
     "Plugin 'moby/moby'                          " Docker
-    Plugin 'jceb/vim-orgmode'                   " Vim-Org
+    "Plugin 'jceb/vim-orgmode'                   " Vim-Org
 
 "-------------------===Color schemes===-------------------------------
     Plugin 'NLKNguyen/papercolor-theme'         " PaperColor
-    Plugin 'romainl/Apprentice'                 " apprentice
-    Plugin 'AlessandroYorba/Sierra'             " sierra
-    Plugin 'AlessandroYorba/Alduin'             " alduin
-    Plugin 'AlessandroYorba/Despacio'           " despacio
-    Plugin 'colepeters/spacemacs-theme.vim'     " spacemacs-theme
-    Plugin 'AlessandroYorba/Breve'              " breve
-    Plugin 'AlessandroYorba/Arcadia'            " arcadia
+    "Plugin 'romainl/Apprentice'                 " apprentice
+    "Plugin 'AlessandroYorba/Sierra'             " sierra
+    "Plugin 'AlessandroYorba/Alduin'             " alduin
+    "Plugin 'AlessandroYorba/Despacio'           " despacio
+    "Plugin 'colepeters/spacemacs-theme.vim'     " spacemacs-theme
+    "Plugin 'AlessandroYorba/Breve'              " breve
+    "Plugin 'AlessandroYorba/Arcadia'            " arcadia
 
 "-------------------===Other===-------------------------------
     Plugin 'tpope/vim-surround'                 " surround;
     Plugin 'jiangmiao/auto-pairs'               " autopairing quotes,braces
-    Plugin 'preservim/nerdcommenter'            " commentor
-    Plugin 'linuxsuren/devops.vim'              " Devops
+    "Plugin 'preservim/nerdcommenter'            " commentor
+    "Plugin 'linuxsuren/devops.vim'              " Devops
     Plugin 'itchyny/lightline.vim'              " status bar
     Plugin 'tmhedberg/SimpylFold'               " Code  Folding
 
@@ -114,10 +114,10 @@ nnoremap <leader>. :CtrlPTag<cr>
         let g:gitgutter_sign_removed_first_line = '^'
         let g:gitgutter_sign_modified_removed = '<'
         let g:gitgutter_override_sign_column_highlight = 1
-        
-        highlight SignColumn guibg=bg
-        highlight SignColumn ctermbg=bg
-        
+
+        "highlight SignColumn guibg=bg
+        "highlight SignColumn ctermbg=bg
+
         " Update sign column every quarter second
         set updatetime=250
 
@@ -401,18 +401,16 @@ nnoremap <leader>. :CtrlPTag<cr>
     let NERDTreeWinSize=20
     "autocmd VimEnter * if !argc() | NERDTree | endif  " Load NERDTree only if vim is run without arguments
 
+"Copy and Paste from + register
+"===============================
+    vnoremap <C-c> "+y
+    "map <C-v> "+p <Enter>
 
 
 " Key Mapping
 " ==============
 "
     map <C-a> GVgg
-    map <C-n> :enew
-    map <C-o> :e . <Enter>
-    map <C-c> y
-    map <C-s> :w <Enter> <CR> :echo "Saved" <CR>
-    map <C-x> d
-    map <C-z> :q! <Enter>
+    map <C-o> :vs . <Enter>
     map <C-i> >>
     map <C-j> <<
-    map <C-h> :%s/
