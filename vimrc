@@ -2,7 +2,6 @@
 " .vimrc file by Shilpa
 " ===========================
 
-
 " Automatic reloading of .vimrc
 " =============================
 if has("autocmd")
@@ -27,23 +26,23 @@ call vundle#begin()
 "-------------------===Code/Project navigation===-------------
     Plugin 'scrooloose/nerdtree'                " tree like explorer
     Plugin 'kien/ctrlp.vim'                     " Fast transitions on project files
+    Plugin 'junegunn/fzf', { 'do': { -> fzf#install() } }  "fuzzy finder
 
 "-------------------===Languages support===------------------
-    Plugin 'davidhalter/jedi-vim'               " Python completion
+    Plugin 'davidhalter/jedi-vim'                " Python completion
     "Plugin 'valloric/youcompleteme'             " Code completion
-    "Plugin 'ervandew/supertab'                  " tab
-    Plugin 'timothycrosley/isort'               " sort imports
-    "Plugin 'google/yapf'                        " code formatter
+    Plugin 'ervandew/supertab'                  " tab
+    Plugin 'timothycrosley/isort'                " sort imports
+    Plugin 'google/yapf'                        " code formatter
     "Plugin 'dense-analysis/ale'                 " ALE
     "Plugin 'maximbaz/lightline-ale'             " Lightline-ALE
+    Plugin 'chr4/nginx.vim'                      " for nginx
 
 "-------------------===Python===-----------------------------
-    "Plugin 'pythoncomplete'                     " Python Code Completion
-    "Plugin 'maralla/completor.vim'
     "Plugin 'deoplete-plugins/deoplete-jedi'
     Plugin 'klen/python-mode'                   " Python mode(docs, refactor, lints...)
     Plugin 'Vimjas/vim-python-pep8-indent'      " python indent
-
+    Plugin 'williamjameshandley/vimteractive'   " python interactive terminal
 "-------------------===Snippets support===--------------------
     Plugin 'MarcWeber/vim-addon-mw-utils'
     Plugin 'tomtom/tlib_vim'
@@ -57,11 +56,12 @@ call vundle#begin()
 
 "-------------------===Color schemes===-------------------------------
     Plugin 'NLKNguyen/papercolor-theme'         " PaperColor
+    Plugin 'dikiaap/minimalist'
     "Plugin 'romainl/Apprentice'                 " apprentice
     "Plugin 'AlessandroYorba/Sierra'             " sierra
     "Plugin 'AlessandroYorba/Alduin'             " alduin
     "Plugin 'AlessandroYorba/Despacio'           " despacio
-    "Plugin 'colepeters/spacemacs-theme.vim'     " spacemacs-theme
+    Plugin 'colepeters/spacemacs-theme.vim'     " spacemacs-theme
     "Plugin 'AlessandroYorba/Breve'              " breve
     "Plugin 'AlessandroYorba/Arcadia'            " arcadia
 
@@ -87,8 +87,8 @@ nnoremap <leader>. :CtrlPTag<cr>
     if $COLORTERM == 'gnome-terminal'
         set t_Co=256
     endif
-    set background=light
-    colorscheme PaperColor "spacemacs-theme arcadia despacio PaperColor spacemacs-theme sierra
+    set background=dark
+    colorscheme spacemacs-theme "minimalist rcadia despacio PaperColor spacemacs-theme sierra
 
     "let g:despacio_Sunset = 1
     "let g:despacio_Twilight = 1
@@ -131,7 +131,7 @@ nnoremap <leader>. :CtrlPTag<cr>
         let g:jedi#usages_command = "<leader>n"
         let g:jedi#completions_command = "<C-Space>"
         let g:jedi#rename_command = "<leader>r"
-        let g:jedi#popup_select_first = 1 "Jedi selects the first line of the completion menu
+        let g:jedi#popup_select_first = 0 "Jedi selects the first line of the completion menu
         let g:jedi#force_py_version = 3
         let g:jedi#completions_enabled = 1
         let g:jedi#popup_on_dot = 1
@@ -145,7 +145,7 @@ nnoremap <leader>. :CtrlPTag<cr>
         let g:pymode_indent = 1
         let g:pymode_lint = 1
         let g:pymode_lint_on_write = 1
-        let g:pymode_lint_checkers = ['pyflakes', 'pep8', 'mccabe']
+        let g:pymode_lint_checkers = ['pyflakes', 'pep8']
         let g:pymode_lint_signs = 1
         let g:pymode_lint_todo_symbol = 'WW'
         let g:pymode_lint_comment_symbol = 'CC'
@@ -180,13 +180,20 @@ nnoremap <leader>. :CtrlPTag<cr>
         let g:ctrlp_show_hidden = 0
         let g:ctrlp_tabpage_position = 'ac'
 
+" VIMTERACTIVE
+" ================================
+
+        let g:vimteractive_vertical = 1        " Vertically split terminals
+        let g:vimteractive_autostart = 0       " Don't start terminals by default
+
 " ISORT
 " ============================
     autocmd FileType python nnoremap <leader>s :!isort %<CR><CR>
 " YAPF
 " ===============
     autocmd FileType python nnoremap <leader>= :0,$!yapf<CR>
-
+    "autocmd FileType python YapfAutoEnable
+    "autocmd FileType python vnoremap <buffer><Leader>cf :Yapf<CR>
 " UltiSnip settings
 " ====================================================
         let g:UltiSnipsExpandTrigger="<tab>"
@@ -404,7 +411,7 @@ nnoremap <leader>. :CtrlPTag<cr>
 "Copy and Paste from + register
 "===============================
     vnoremap <C-c> "+y
-    "map <C-v> "+p <Enter>
+    map <C-b> "+p <Enter>
 
 
 " Key Mapping
@@ -412,5 +419,6 @@ nnoremap <leader>. :CtrlPTag<cr>
 "
     map <C-a> GVgg
     map <C-o> :vs . <Enter>
+    map <leader>t :vert term <Enter>
     map <C-i> >>
     map <C-j> <<
